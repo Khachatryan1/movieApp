@@ -1,0 +1,896 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, .main {
+    background: repeating-linear-gradient(-45deg,#0d1d21,#0d1d21 1px,#0a171a 1px,#0a171a 10px);
+}
+
+$text-color: #c7d0d3;
+$border-color: #2a7088;
+$primary-color: #122c31;
+$secondary-color: #0a171a;
+
+@mixin primary-button-styles {
+    width: 260px;
+    height: 45px;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    letter-spacing: 4px;
+    font-weight: 600;
+    background-color: $text-color;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+@mixin primary-button-hover-styles {
+    cursor: pointer;
+    background-color: rgba(199, 208, 211, 0.61);
+    box-shadow: rgba(199, 208, 211, 0.61) 10px -1px 20px;
+}
+
+@mixin secondary-button-styles {
+    font-size: 18px;
+    letter-spacing: 4px;
+    padding: 8px 40px 8px 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: #edcc61;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+@mixin secondary-button-hover-styles {
+    cursor: pointer;
+    background-color: #ffdb4d;
+    box-shadow: rgb(248, 228, 148) 10px -1px 20px;
+}
+
+@mixin primary-input-styles {
+    color: $text-color;
+    background-color: $secondary-color;
+    letter-spacing: 2px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    width: 280px;
+    height: 40px;
+    border-radius: 8px;
+    padding: 5px 10px;
+    padding-right: 35px;
+    margin-top: 8px;
+}
+
+@mixin primary-input-placeholder-styles {
+    color: $text-color;
+    letter-spacing: 3px;
+}
+
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+.error_massage {
+    letter-spacing: 3px;
+    border: 2px solid red;
+    border-top: none;
+    border-radius: 12px;
+    padding: 10px;
+    font-size: 18px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+.header {
+    position: fixed;
+    margin-bottom: 60px;
+    z-index: 1000;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    padding: 15px;
+    align-items: center;
+    background-color: $primary-color;
+    color: $text-color;
+    border-bottom: 1px solid $border-color;
+
+    .header_image_container {
+        height: 30px;
+        margin-left: 15px;
+
+        img {
+            height: 100%;
+            transition: scale 0.3s ease;
+        }
+
+        img:hover {
+            cursor: pointer;
+            scale: 1.1;
+        }
+    }
+
+    .header_right_side {
+        width: 500px;
+        display: flex;
+        gap: 10px;
+        justify-content: right;
+    }
+
+    .user_name {
+        font-size: 20px;
+        margin-top: 3px;
+        margin-right: 15px;
+        letter-spacing: 2px;
+        text-transform: capitalize;
+    }
+
+    .header_icon_container {
+        font-size: 30px;
+        margin-right: 15px;
+        transition: scale 0.3s ease;
+    }
+
+    .header_icon_container:hover {
+        scale: 1.1;
+        cursor: pointer;
+    }
+}
+
+.button_container {
+    margin-left: 42%;
+    display: flex;
+    gap: 35px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+
+    .pagination_button {
+        font-size: 35px;
+        font-weight: bold;
+        padding: 0 35px 5px 35px;
+        border: 1px solid $border-color;
+        outline: none;
+        background-color: $primary-color;
+        color: #050b0e;
+        border-radius: 3px;
+
+    }
+
+    .pagination_button:hover {
+        cursor: pointer;
+        color: $border-color;
+        scale: 1.1;
+        transition: all 0.3s ease;
+    }
+
+    .pagination_button[disabled] {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
+.main {
+    margin-top: 60px;
+    flex-grow: 1;
+
+    .movies_list_container {
+        background-color: #050d0e;
+        border-top: 1px solid $border-color;
+        padding: 5px 0;
+    }
+
+    .list_title {
+        color: $text-color;
+        font-size: 33px;
+        text-align: center;
+        margin: 10px 0;
+        letter-spacing: 3px;
+    }
+
+    .recommended_movies {
+        display: flex;
+        justify-content: space-around;
+        border-top: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+        padding: 30px 0;
+        background-color: $secondary-color;
+    }
+
+    .movies_list {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        row-gap: 22px;
+        border-top: 1px solid $border-color;
+        padding: 30px 0 0 50px;
+        overflow: hidden;
+    }
+
+    .movie_card {
+        width: 200px;
+        background-color: $primary-color;
+        align-items: center;
+        border-radius: 13px;
+        position: relative;
+
+        .movie_card_description {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 80px;
+            padding: 10px;
+            letter-spacing: 1px;
+            color: $text-color;
+
+            p {
+                font-size: 12px;
+            }
+        }
+
+        .movie_card_image_container {
+            width: 200px;
+            height: 300px;
+            overflow: hidden;
+            border-top-left-radius: 13px;
+            border-top-right-radius: 13px;
+            position: relative;
+
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    .play_symbol {
+        position: absolute;
+        top: 47%;
+        left: 48%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 1px solid $border-color;
+        background-color: $secondary-color;
+        color: $text-color;
+        font-size: 55px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 6px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .movie_card:hover {
+        cursor: pointer;
+
+        .play_symbol {
+            opacity: 1;
+            transition: opacity 0.9s ease;
+        }
+
+        .movie_card_image_container {
+            overflow: hidden;
+
+            img {
+                scale: 1.1;
+                transform: scale(1.1);
+                transition: transform 0.3s ease;
+            }
+        }
+    }
+}
+
+
+
+.greeting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 17px;
+    padding: 70px;
+
+    .page_title {
+        width: 500px;
+        color: $text-color;
+        font-weight: bolder;
+        font-size: 50px;
+        letter-spacing: 4px;
+        text-align: center;
+    }
+
+    .search_icon {
+        position: relative;
+        color: $text-color;
+        top: 53px;
+        right: 250px;
+    }
+
+    .search_input {
+        @include primary-input-styles;
+        width: 540px;
+        height: 45px;
+        padding: 10px 40px;
+        border: 1px solid $border-color;
+        caret-color: $text-color;
+        margin-bottom: -10px;
+        font-size: 18px;
+    }
+
+    .search_input::placeholder {
+        @include primary-input-placeholder-styles;
+    }
+
+    .arrow_icon {
+        position: relative;
+        top: 98px;
+        left: 70px;
+    }
+
+    .search_button_icon {
+        position: relative;
+        bottom: 98px;
+        left: 50px;
+    }
+
+    .homepage_button, .search_button {
+        @include secondary-button-styles;
+    }
+
+    .homepage_button:hover, .search_button:hover {
+        @include secondary-button-hover-styles;
+    }
+}
+
+.modal_open {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    pointer-events: none;
+}
+
+.modal_window {
+    position: fixed;
+    top: 100px;
+    left: calc(50% - 175px);
+    z-index: 1000;
+    width: 350px;
+    background-color: rgb(35, 83, 96);
+    border-radius: 25px;
+    border: 1px solid $border-color;
+    pointer-events: auto;
+    box-shadow: 1px 34px 48px 34px rgba(13,29,33,0.47) inset;
+    text-align: center;
+    padding: 45px;
+    display: flex;
+    flex-direction: column;
+    color: $text-color;
+
+    .exit-icon {
+        position: relative;
+        font-size: 23px;
+        color: $secondary-color;
+        bottom: 33px;
+        left: 60px;
+    }
+
+    .login-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+
+        .modal_window_input {
+            @include primary-input-styles;
+            margin-top: 8px;
+            font-size: 18px;
+        }
+
+        .modal_window_input::placeholder {
+            @include primary-input-placeholder-styles;
+        }
+
+        .email-icon,.password-icon  {
+            position: relative;
+            font-size: 20px;
+            top: 37px;
+            left: 120px;
+        }
+
+        .password-icon:hover {
+            cursor: pointer;
+            scale: 1.2;
+        }
+
+        .sign_in_button {
+            @include secondary-button-styles;
+            margin: 30px 0;
+            width: 280px;
+            height: 40px;
+            outline: none;
+            font-size: 20px;
+            letter-spacing: 5px;
+            font-weight: 600;
+            padding: 8px 40px 8px 20px;
+        }
+
+        .sign_in_button:hover {
+            @include secondary-button-hover-styles;
+        }
+
+    }
+
+    .create_new_account_button {
+        @include primary-button-styles;
+        margin-top: -10;
+    }
+
+    .create_new_account_button:hover {
+        @include primary-button-hover-styles;
+    }
+
+    .exit {
+        margin-top: 15px;
+    }
+
+    .modal_window_close {
+        position: relative;
+        left: 255px;
+        top: -20px;
+        font-size: 30px;
+        border-radius: 100%;
+        color: $text-color;
+        background-color: $primary-color;
+        padding: 3px;
+        transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    .modal_window_close:hover {
+        cursor: pointer;
+        background-color: #edcc61;
+        color: $secondary-color;
+    }
+}
+
+.form-container {
+    color: $text-color;
+    width: 400px;
+    margin: 40px auto;
+    padding: 50px;
+    box-shadow: inset 0px 0px 43px 22px #0A171A, 0px 1px 50px 50px #245C6E;
+    background-color: #245c6e;
+    border-radius: 20px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 3px;
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+
+        .registration_input {
+            @include primary-input-styles;
+        }
+
+        .registration_input::placeholder {
+            @include primary-input-placeholder-styles;
+        }
+    }
+
+    h2 {
+        font-size: 32px;
+        white-space: nowrap;
+        margin-bottom: 10px;
+    }
+
+    .registration_button {
+        @include primary-button-styles;
+
+    }
+
+    .registration_button:hover {
+        @include primary-button-hover-styles;
+    }
+
+    .showRegistPasswords {
+        font-size: 40px;
+        cursor: pointer;
+        transition: scale 0.3s ease;
+    }
+
+    .showRegistPasswords:hover {
+        scale: 1.1;
+    }
+}
+
+.more_info {
+    color: $text-color;
+    letter-spacing: 2px;
+    font-size: 18px;
+
+    .more_info_info {
+        display: flex;
+        gap: 80px;
+        padding: 50px;
+
+        .more_info_image_container {
+            width: 400px;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .more_info_description {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            border: 1px solid $border-color;
+            padding: 25px;
+            border-radius: 10px;
+            background-color: $primary-color;
+            width: 100%;
+
+            .more_info_name {
+                font-size: 35px;
+                letter-spacing: 3px;
+                margin-bottom: -20px;
+            }
+        }
+    }
+}
+
+.comment_block {
+    margin: 25px 0;
+    padding: 30px;
+    background-color: $primary-color;
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+
+    .comment_block_title {
+        text-align: center;
+        font-size: 35px;
+        letter-spacing: 2px;
+    }
+
+    .comment_input_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-top: 10px;
+
+        .comment_input {
+            height: 70px;
+            width: 500px;
+            border-radius: 10px;
+            outline: none;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .comment_input:focus {
+            border: 2px solid $border-color;
+        }
+
+        .add_comment_button {
+            @include primary-button-styles;
+
+        }
+
+        .add_comment_button:hover {
+            @include primary-button-hover-styles;
+        }
+    }
+
+    .comment_container {
+        background-color: $secondary-color;
+        margin-top: 15px;
+        padding: 10px 20px;
+        text-transform: capitalize;
+        border: 1px solid $border-color;
+
+        .comendator {
+            display: flex;
+            gap: 10px;
+        }
+
+        .comment_details {
+            display: flex;
+            gap: 15px;
+            margin: 10px 0 0 50px;
+
+            .comment_details_icon:hover {
+                transform: scale(1.1);
+                transition: scale 0.3s ease;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.search_result {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 25px;
+}
+
+.search_headers {
+    text-align: center;
+    font-size: 35px;
+    margin-top: 25px;
+    letter-spacing: 3px;
+    color: $text-color;
+}
+
+.movie_not_found_image_container {
+    width: 600px;
+    margin: 50px auto;
+
+    img {
+        width: 100%;
+        color: green;
+    }
+}
+
+
+
+.admin_page {
+    padding: 30px;
+    display: flex;
+    gap: 25px;
+
+    .admin_main {
+        border: 1px solid $border-color;
+        padding: 30px;
+        border-radius: 10px;
+        background-color: $primary-color;
+        flex: 1;
+
+        .search_blocks_container {
+            display: flex;
+            justify-content: space-between;
+
+            .search_blocks {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                margin-top: 15px;
+
+                p {
+                    font-size: 25px;
+                    letter-spacing: 2px;
+                    color: $text-color;
+                }
+
+                .search_blocks_button {
+                    @include primary-button-styles;
+                }
+
+                .search_blocks_button:hover {
+                    @include primary-button-hover-styles;
+                }
+
+                .search_blocks_input {
+                    @include primary-input-styles;
+                }
+
+                .search_blocks_input::placeholder {
+                    @include primary-input-placeholder-styles;
+                }
+
+                .search_blocks_input:focus {
+                    border: 1px solid $border-color;
+                }
+            }
+        }
+
+        .admin_main_headers {
+            font-size: 30px;
+            letter-spacing: 3px;
+            color: $text-color;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .admin_not_found {
+            display: block;
+            margin: 50px auto;
+        }
+
+        .admin_movies_list {
+            margin-top: 15px;
+            margin-bottom: 25px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            width: 100%;
+            text-align: center;
+
+            .thstyle {
+                border: 1px solid black;
+                padding: 8px;
+                background-color: $text-color;
+            }
+
+            .admin_movies_list_details {
+                border: 1px solid black;
+                padding: 8px;
+                color: $text-color;
+                letter-spacing: 2px;
+            }
+
+            .admin_movies_list_trash {
+                color: red;
+            }
+
+            .admin_movies_list_trash:hover {
+                background-color: red;
+                color: #050d0e;
+            }
+        }
+
+        .movies_list_row:hover {
+            cursor: pointer;
+            background-color: green;
+        }
+    }
+
+    .admin_aside {
+        width: 300px;
+        height: 80vh;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+
+        .admin_data {
+            border: 1px solid $border-color;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: $primary-color;
+            color: $text-color;
+            position: fixed;
+            margin-left: 18px;
+
+            p {
+                margin: 15px 0 0 15px;
+                font-size: 18px;
+
+                span {
+                    margin-left: 15px;
+                }
+            }
+
+            .personal {
+                display: flex;
+                justify-content: space-around;
+                align-items: baseline;
+
+                .admin_icon {
+                    font-size: 50px;
+                }
+            }
+        }
+
+        .admin_actions {
+            border: 1px solid $border-color;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: $primary-color;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: fixed;
+            top: 300px;
+
+            .admin_action_button {
+                @include primary-button-styles;
+            }
+
+            .admin_action_button:hover {
+                @include primary-button-hover-styles;
+            }
+        }
+    }
+
+    .create_form {
+        display: flex;
+        justify-content: space-around;
+
+        .create_form_blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 15px;
+            color: $text-color;
+            border: 2px solid $border-color;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+
+            legend {
+                font-size: 20px;
+                letter-spacing: 2px;
+                margin-left: -35px;
+            }
+
+            textarea {
+                max-width: 280px;
+            }
+        }
+
+        .create_movie_input {
+            @include primary-input-styles;
+            margin-top: 8px;
+        }
+
+        .create_movie_input::placeholder {
+            @include primary-input-placeholder-styles;
+        }
+
+        .create_movie_input:focus {
+            border: 1px solid $border-color;
+        }
+    }
+
+    .create_movie_button {
+        @include primary-button-styles;
+        margin: 55px 0 0 405px;
+    }
+
+    .create_movie_button:hover {
+        @include primary-button-hover-styles;
+    }
+}
+
+.pagenotfound_container {
+    width: 800px;
+    margin-left: 300px;
+
+    img {
+        width: 100%;
+    }
+}
+
+.footer {
+    border-top: 1px solid $border-color;
+    background-color: #091718;
+    color: $text-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+    padding: 25px;
+
+    .footer_image_container {
+        height: 50px;
+
+        img {
+            height: 100%;
+        }
+    }
+}

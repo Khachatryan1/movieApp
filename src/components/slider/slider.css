@@ -1,0 +1,30 @@
+.slide-container {
+    margin-left: 155px;
+    height: 600px;
+}
+
+.coming-soon {
+    text-align: center;
+    font-size: 33px;
+    letter-spacing: 3px;
+    color: #c7d0d3;
+    margin: 10px 0 20px -150px;
+}
+
+.slide-img {
+    height: 400px;
+    width: 300px;
+    margin-top: 30px;
+}
+
+.slick-center .slide-img {
+    width: 350px;
+    height: 450px;
+    margin-left: -20px;
+    scale: 1.2;
+    transition: all  0.5s ease-in-out;
+}
+
+
+
+
